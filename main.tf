@@ -18,6 +18,10 @@ resource "google_storage_bucket" "test_bucket" {
   location      = "US"
   force_destroy = true
 
+  labels = {
+    environment = "playground"
+  }
+
   uniform_bucket_level_access = true
 
   versioning {
