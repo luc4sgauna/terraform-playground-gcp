@@ -1,3 +1,4 @@
+# Configure the Google Cloud provider
 terraform {
   required_providers {
     google = {
@@ -8,22 +9,19 @@ terraform {
 }
 
 provider "google" {
-  project = "my-devops-playground-468422"
-  region  = "us-central1"
+  project = var.project_id
 }
 
 # Create a new storage bucket
 resource "google_storage_bucket" "test_bucket" {
-  name          = "terraform-playground-bucket-468422"  
+  name          = var.bucket_name
   location      = "US"
   force_destroy = true
 
-  labels = {
-    environment = "playground"
-  }
-
+  # Enable uniform bucket-level access
   uniform_bucket_level_access = true
 
+  # Add versioning
   versioning {
     enabled = true
   }
